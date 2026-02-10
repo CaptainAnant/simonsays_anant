@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Simon Says Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simon Says</h1>
+        
+        <p id="maxScore">HighScore: 0</p>
+        <h3 id="highscore">Press Start to Play</h3>
+
+        <div class="game-board">
+            <div class="box red" id="red"></div>
+            <div class="box green" id="green"></div>
+            <div class="box yellow" id="yellow"></div>
+            <div class="box blue" id="blue"></div>
+        </div>
+
+        <button id="startBtn">Start Game</button>
+        
+        <p class="instruction">Watch the sequence, then repeat it.</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

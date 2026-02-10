@@ -1,0 +1,128 @@
+body {
+    text-align: center;
+    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Prevent scrolling/bouncing effects on mobile during play */
+    overscroll-behavior: none; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+h3 {
+    min-height: 1.5rem; /* Prevents layout shift */
+    margin: 5px 0 15px 0;
+}
+
+#maxScore {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #555;
+    margin: 0;
+}
+
+/* THE GAME GRID */
+.game-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    /* vmin ensures it fits on both portrait and landscape mobile */
+    width: 80vmin; 
+    height: 80vmin;
+    max-width: 400px;
+    max-height: 400px;
+    margin-bottom: 20px;
+}
+
+.box {
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+    /* Mobile optimization: remove blue tap highlight */
+    -webkit-tap-highlight-color: transparent; 
+}
+
+/* Active state simulation for touch */
+.box:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.red { background-color: #ff5252; border: 4px solid #b71c1c; }
+.green { background-color: #69f0ae; border: 4px solid #00c853; }
+.yellow { background-color: #ffff00; border: 4px solid #fbc02d; }
+.blue { background-color: #40c4ff; border: 4px solid #0277bd; }
+
+/* Flash classes */
+.flash {
+    background-color: white !important;
+    opacity: 1;
+    box-shadow: 0 0 15px white;
+}
+
+.userflash {
+    background-color: #000 !important; /* Visual feedback for user click */
+    opacity: 0.2;
+}
+
+/* Start Button */
+#startBtn {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    padding: 15px 40px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px #2E7D32;
+    margin-bottom: 15px;
+    touch-action: manipulation; /* Improves touch response */
+}
+
+#startBtn:active {
+    box-shadow: 0 2px #2E7D32;
+    transform: translateY(2px);
+}
+
+.instruction {
+    color: #666;
+    font-size: 0.9rem;
+    max-width: 300px;
+}
+
+/* Flash Red on Game Over */
+.game-over-flash {
+    animation: shake 0.5s;
+    background-color: #ffcccc;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
