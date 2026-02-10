@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div id="instruction-overlay">
+        <div class="glass-panel">
+            <span class="close-btn">&times;</span>
+            <h2>How to Play</h2>
+            <p>1. Press <b>Start</b> to begin.</p>
+            <p>2. Watch the sequence of flashing colors.</p>
+            <p>3. Repeat the sequence by clicking the same colors.</p>
+            <p>4. The sequence gets longer with every level!</p>
+            <button id="modal-start-btn">Let's Play</button>
+        </div>
+    </div>
+
     <div class="container">
         <h1>Simon Says</h1>
         
@@ -21,9 +34,11 @@
         </div>
 
         <button id="startBtn">Start Game</button>
-        
-        <p class="instruction">Watch the sequence, then repeat it.</p>
     </div>
+
+    <footer>
+        <p>&copy; 2024 [Your Name]. All Rights Reserved.</p>
+    </footer>
 
     <script src="app.js"></script>
 </body>
