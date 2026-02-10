@@ -1,12 +1,11 @@
 /* Base Styles */
 body {
     text-align: center;
-    background-color: #f0f2f5; /* Slightly darker for glass contrast */
+    background-color: #f0f2f5; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     overscroll-behavior: none; 
-    /* Gradient background helps the glass effect pop */
     background-image: radial-gradient(circle at 50% 50%, #f0f2f5 0%, #cfd8dc 100%);
     min-height: 100vh;
 }
@@ -16,7 +15,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 90vh; /* Leave room for footer */
+    min-height: 90vh;
     padding: 10px;
     padding-bottom: 50px;
 }
@@ -28,18 +27,18 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Dark dimming */
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(3px); /* Blur the background slightly */
+    backdrop-filter: blur(3px);
 }
 
 .glass-panel {
-    background: rgba(255, 255, 255, 0.65); /* Semi-transparent white */
+    background: rgba(255, 255, 255, 0.65);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(12px); /* Strong blur for the glass effect */
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -51,18 +50,10 @@ body {
     color: #333;
 }
 
-.glass-panel h2 {
-    margin-top: 0;
-    color: #1a1a1a;
-}
+.glass-panel h2 { margin-top: 0; color: #1a1a1a; }
+.glass-panel p { font-size: 1.1rem; line-height: 1.5; color: #444; }
 
-.glass-panel p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: #444;
-}
-
-/* Close Button (Cross) */
+/* Close Button */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -73,10 +64,7 @@ body {
     cursor: pointer;
     transition: color 0.3s;
 }
-
-.close-btn:hover {
-    color: #d32f2f;
-}
+.close-btn:hover { color: #d32f2f; }
 
 #modal-start-btn {
     background-color: #0277bd;
@@ -122,9 +110,8 @@ h3 { min-height: 1.5rem; margin: 5px 0 15px 0; }
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     -webkit-tap-highlight-color: transparent; 
-    transition: transform 0.1s;
+    transition: transform 0.05s; /* Faster click animation */
 }
-
 .box:active { transform: scale(0.95); box-shadow: inset 0 0 10px rgba(0,0,0,0.3); }
 
 .red { background-color: #ff5252; border: 4px solid #b71c1c; }
@@ -135,19 +122,36 @@ h3 { min-height: 1.5rem; margin: 5px 0 15px 0; }
 .flash { background-color: white !important; opacity: 1; box-shadow: 0 0 15px white; }
 .userflash { background-color: #000 !important; opacity: 0.2; }
 
+/* NEW 3D BUTTON STYLE */
 #startBtn {
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 50px;
+    background-color: #5cb85c;
     color: white;
+    border: none;
     padding: 15px 40px;
     font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
     cursor: pointer;
-    box-shadow: 0 4px #2E7D32;
+    /* The 3D effect shadow */
+    box-shadow: 0 5px #4cae4c;
+    transition: all 0.1s ease;
+    outline: none;
+    margin-top: 15px;
     touch-action: manipulation;
 }
 
-#startBtn:active { box-shadow: 0 2px #2E7D32; transform: translateY(2px); }
+#startBtn:active {
+    box-shadow: 0 2px #4cae4c;
+    transform: translateY(3px);
+}
+
+/* Style for when the game is running */
+#startBtn.playing {
+    box-shadow: 0 2px #4cae4c;
+    transform: translateY(3px);
+    opacity: 0.8;
+    cursor: default;
+}
 
 .game-over-flash { animation: shake 0.5s; background-color: #ffcccc; }
 

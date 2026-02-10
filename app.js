@@ -5,7 +5,7 @@ let btns = ["red", "yellow", "green", "blue"];
 let started = false;
 let level = 0;
 let highScore = 0;
-let userTurn = false; // Prevents clicking during computer sequence
+let userTurn = false;
 
 let maxScoreDisplay = document.querySelector("#maxScore");
 let messageDisplay = document.querySelector("#highscore");
@@ -33,7 +33,6 @@ modalStartBtn.addEventListener('click', function() {
 
 // --- Game Logic ---
 
-// Start Game via Main Button
 startBtn.addEventListener("click", function() {
     if (started == false) {
         startGame();
@@ -46,9 +45,11 @@ function startGame() {
     level = 0;
     gameSeq = [];
     userSeq = [];
+    
     startBtn.innerText = "Playing...";
-    startBtn.style.pointerEvents = "none"; 
-    startBtn.style.opacity = "0.6";
+    // Add class for 3D pressed state
+    startBtn.classList.add("playing");
+    
     updateLevel();
 }
 
@@ -57,40 +58,35 @@ function updateLevel() {
     level++;
     messageDisplay.innerText = `Level ${level}`;
 
-    // Add new random color
     let randomIdx = Math.floor(Math.random() * 4);
     let randomColor = btns[randomIdx];
     gameSeq.push(randomColor);
 
-    // Play the FULL sequence
     playSequence();
 }
 
 function playSequence() {
-    userTurn = false; // Lock user input
-    let i = 0;
+    userTurn = false;
 
-    let intervalId = setInterval(() => {
-        let color = gameSeq[i];
-        let btn = document.querySelector(`.${color}`);
-        gameFlash(btn);
-        i++;
+    // --- MODIFIED LOGIC: Only flash the newest color ---
+    // Get the last color added to the array
+    let lastColor = gameSeq[gameSeq.length - 1];
+    let btn = document.querySelector(`.${lastColor}`);
 
-        if (i >= gameSeq.length) {
-            clearInterval(intervalId);
-            // Allow user to click after sequence finishes
-            setTimeout(() => {
-                userTurn = true;
-            }, 500); 
-        }
-    }, 800); // 800ms speed between flashes
+    // Flash just that button
+    gameFlash(btn);
+
+    // Enable user input after the flash finishes + small buffer
+    setTimeout(() => {
+        userTurn = true;
+    }, 500); 
 }
 
 function gameFlash(btn) {
     btn.classList.add("flash");
     setTimeout(function() {
         btn.classList.remove("flash");
-    }, 250);
+    }, 200);
 }
 
 function userFlash(btn) {
@@ -101,11 +97,9 @@ function userFlash(btn) {
 }
 
 function checkBtn(idx) {
-    // Check if the current click matches the sequence at that index
     if (userSeq[idx] === gameSeq[idx]) {
-        // If the user has finished the sequence for this level
         if (userSeq.length == gameSeq.length) {
-            setTimeout(updateLevel, 1000);
+            setTimeout(updateLevel, 500);
         }
     } else {
         gameOver();
@@ -129,7 +123,6 @@ function gameOver() {
 }
 
 function btnPress() {
-    // Only allow click if game is started AND it is the user's turn
     if (!started || !userTurn) { 
         return; 
     }
@@ -143,7 +136,6 @@ function btnPress() {
     checkBtn(userSeq.length - 1);
 }
 
-// Add event listeners to colored boxes
 for (btn of allBtns) {
     btn.addEventListener("click", btnPress);
 }
@@ -154,7 +146,6 @@ function reset() {
     userSeq = [];
     level = 0;
     userTurn = false;
-    startBtn.innerText = "Restart Game";
-    startBtn.style.pointerEvents = "all";
-    startBtn.style.opacity = "1";
+    startBtn.innerText = "Start Game";
+    startBtn.classList.remove("playing");
 }
